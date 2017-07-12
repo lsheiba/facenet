@@ -43,7 +43,7 @@ from tensorflow.python.ops import data_flow_ops
 
 def main(args):
   
-    network = importlib.import_module(args.model_def, 'inference')
+    network = importlib.import_module(args.model_def)
 
     subdir = datetime.strftime(datetime.now(), '%Y%m%d-%H%M%S')
     log_dir = os.path.join(os.path.expanduser(args.logs_base_dir), subdir)
@@ -53,6 +53,9 @@ def main(args):
     if not os.path.isdir(model_dir):  # Create the model directory if it doesn't exist
         os.makedirs(model_dir)
 
+    # Write arguments to a text file
+    facenet.write_arguments_to_file(args, os.path.join(log_dir, 'arguments.txt'))
+        
     # Store some git revision info in a text file in the log directory
     src_path,_ = os.path.split(os.path.realpath(__file__))
     facenet.store_revision_info(src_path, log_dir, ' '.join(sys.argv))
@@ -212,7 +215,7 @@ def train(args, sess, dataset, epoch, image_paths_placeholder, labels_placeholde
         sess.run(enqueue_op, {image_paths_placeholder: image_paths_array, labels_placeholder: labels_array})
         emb_array = np.zeros((nrof_examples, embedding_size))
         nrof_batches = int(np.ceil(nrof_examples / args.batch_size))
-        for i in xrange(nrof_batches):
+        for i in range(nrof_batches):
             batch_size = min(nrof_examples-i*args.batch_size, args.batch_size)
             emb, lab = sess.run([embeddings, labels_batch], feed_dict={batch_size_placeholder: batch_size, 
                 learning_rate_placeholder: lr, phase_train_placeholder: True})

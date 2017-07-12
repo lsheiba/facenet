@@ -322,7 +322,7 @@ class ImageClass():
     def __len__(self):
         return len(self.image_paths)
   
-def get_dataset(paths):
+def get_dataset(paths, has_class_directories=True):
     dataset = []
     for path in paths.split(':'):
         path_exp = os.path.expanduser(path)
@@ -332,13 +332,18 @@ def get_dataset(paths):
         for i in range(nrof_classes):
             class_name = classes[i]
             facedir = os.path.join(path_exp, class_name)
-            if os.path.isdir(facedir):
-                images = os.listdir(facedir)
-                image_paths = [os.path.join(facedir,img) for img in images]
-                dataset.append(ImageClass(class_name, image_paths))
+            image_paths = get_image_paths(facedir)
+            dataset.append(ImageClass(class_name, image_paths))
   
     return dataset
 
+def get_image_paths(facedir):
+    image_paths = []
+    if os.path.isdir(facedir):
+        images = os.listdir(facedir)
+        image_paths = [os.path.join(facedir,img) for img in images]
+    return image_paths
+  
 def split_dataset(dataset, split_ratio, mode):
     if mode=='SPLIT_CLASSES':
         nrof_classes = len(dataset)
@@ -514,3 +519,25 @@ def list_variables(filename):
     variable_map = reader.get_variable_to_shape_map()
     names = sorted(variable_map.keys())
     return names
+
+def put_images_on_grid(images, shape=(16,8)):
+    nrof_images = images.shape[0]
+    img_size = images.shape[1]
+    bw = 3
+    img = np.zeros((shape[1]*(img_size+bw)+bw, shape[0]*(img_size+bw)+bw, 3), np.float32)
+    for i in range(shape[1]):
+        x_start = i*(img_size+bw)+bw
+        for j in range(shape[0]):
+            img_index = i*shape[0]+j
+            if img_index>=nrof_images:
+                break
+            y_start = j*(img_size+bw)+bw
+            img[x_start:x_start+img_size, y_start:y_start+img_size, :] = images[img_index, :, :, :]
+        if img_index>=nrof_images:
+            break
+    return img
+
+def write_arguments_to_file(args, filename):
+    with open(filename, 'w') as f:
+        for key, value in vars(args).iteritems():
+            f.write('%s: %s\n' % (key, str(value)))
