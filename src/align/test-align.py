@@ -37,7 +37,7 @@ import random
 from time import sleep
 
 input_dir='../data/lfw/raw'  #'Directory with unaligned images.')
-output_dir='../datasets/lfw/w_mtcnnpy_160' #'Directory with aligned face thumbnails.')
+output_dir='../datasets/lfw/w_mtcnnpy_a' #'Directory with aligned face thumbnails.')
 image_size=160 #'Image size (height, width) in pixels.', default=182)
 margin=32 #'Margin for the crop around the bounding box (height, width) in pixels.', default=44)
 random_order=False #'Shuffles the order of images to enable alignment using multiple processes.', action='store_true')
