@@ -32,6 +32,7 @@ import numpy as np
 import base64
 import sys
 import os
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 import cv2
 import argparse
 import facenet

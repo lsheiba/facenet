@@ -32,6 +32,7 @@ import tensorflow as tf
 import argparse
 import os
 import sys
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 import facenet
 from six.moves import xrange
 

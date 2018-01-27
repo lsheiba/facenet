@@ -29,9 +29,10 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 import argparse
-import facenet
 import os
 import sys
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
+import facenet
 import time
 import h5py
 import math

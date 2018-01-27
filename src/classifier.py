@@ -29,10 +29,11 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 import argparse
-import facenet
 import os
 import sys
 import math
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
+import facenet
 import pickle
 from sklearn.svm import SVC
 

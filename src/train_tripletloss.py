@@ -28,9 +28,11 @@ from __future__ import division
 from __future__ import print_function
 
 from datetime import datetime
+import os
 import os.path
 import time
 import sys
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 import tensorflow as tf
 import numpy as np
 import importlib

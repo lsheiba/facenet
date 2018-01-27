@@ -32,6 +32,7 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 import argparse
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 import facenet
 import lfw
 import os

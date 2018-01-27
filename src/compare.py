@@ -31,6 +31,7 @@ import tensorflow as tf
 import numpy as np
 import sys
 import os
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 import argparse
 import facenet
 import align.detect_face

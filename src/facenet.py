@@ -28,6 +28,8 @@ from __future__ import division
 from __future__ import print_function
 
 import os
+import sys
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
 from subprocess import Popen, PIPE
 import tensorflow as tf
 from tensorflow.python.framework import ops
