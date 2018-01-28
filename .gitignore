@@ -94,3 +94,5 @@ ENV/
 .idea
 facenet.code-workspace
 
+src/.DS_Store
+.DS_Store

@@ -32,12 +32,12 @@ from __future__ import print_function
 import tensorflow as tf
 import numpy as np
 import argparse
-sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
-import facenet
-import lfw
 import os
 import sys
 import math
+sys.path.append(os.environ['FACENET_DIR']+os.sep+'src')
+import facenet
+import lfw
 from sklearn import metrics
 from scipy.optimize import brentq
 from scipy import interpolate
