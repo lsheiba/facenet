@@ -55,6 +55,7 @@ def main(args):
             paths, actual_issame = lfw.get_paths(os.path.expanduser(args.lfw_dir), pairs, args.lfw_file_ext)
 
             # Load the model
+            print("++++++Load Model\n")
             facenet.load_model(args.model)
             
             # Get input and output tensors
